@@ -1,0 +1,14 @@
+@mixin responsive($screen) {
+  @if ($screen == "T") {
+    @media screen and (min-width: $md-breakpoint) {
+      //   @media에 내용 넣으려면 @content 선언 해줘야함(Sass 특징)
+      @content;
+    }
+  }
+
+  @if ($screen == "D") {
+    @media screen and (min-width: $lg-breakpoint) {
+      @content;
+    }
+  }
+}
