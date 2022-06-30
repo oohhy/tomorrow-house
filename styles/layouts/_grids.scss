@@ -1,10 +1,11 @@
 /*
+
  * MOBILE (<768px) ---------------------------------------
- * fixture··································sm
+ * fixture(별명)·····························sm
  * # of columns·····························4
- * gutter···································20px
+ * gutter···································20px (거의 동일)
  * margin···································5px
- * container-size···························100% - (5px * 2)
+ * container-size···························100% - (5px * 2) = 전체 뷰포트 사이즈(100%)-margin * 2
 
  * TABLET (>=768px) ---------------------------------------
  * fixture··································md
@@ -12,21 +13,32 @@
  * gutter···································20px
  * margin···································30px
  * container-size···························100% - (30px * 2)
- * max-container-size·······················960px
+ * max-container-size·······················960px + 30px * 2
 
- * MOBILE (>=1200px) ---------------------------------------
+ * DESKTOP (>=1200px) ---------------------------------------
  * fixture··································lg
  * # of columns·····························12
  * gutter···································20px
  * unit···································  75px
- * margin···································auto
+ * margin···································auto (container size가 고정이기 때문에 margin은 viewport size에 따라 자동으로 늘어남)
  * container-size···························1140px
- * max-container-size·······················1140px
+ * max-container-size·······················1140px (고정)
+
+**gutter(-col때)나 figma-margin(container때) 모두 css padding으로 넣어주기
+
+ **사이즈가 늘어나도 css padding값은 고정 = figma margin값
+    but 사이즈 늘리면 늘어나는 공간 = css margin
+
+ **부트스트랩 class [.container .col- .row]
+  .container: 그리드가 적용되는 영역 범위 설정
+  .col-: col-i 일때 width값 설정
+  .row: columns을 가로정렬
 
 */
-
+// 모두 동일해서 별명 붙일 필요 X
 $gutter: 20px;
 
+// mobile
 $sm-columns: 4;
 $sm-margin: 5px;
 
@@ -38,28 +50,37 @@ $md-max-container: 960px + $md-margin * 2;
 $lg-breakpoint: 1200px;
 $lg-columns: 12;
 $lg-unit: 75px;
+// 1140px를 식으로 표현(unit이나 gutter 값에 변동 있을때 수정 유용)
 $lg-max-container: ($lg-unit + $gutter) * $lg-columns;
 
+// 그리드 영역 잡기(초록색 네모)
 .container {
   width: 100%;
+  // 피그마 margin 만큼 padding으로 넣어주기
   padding: 0 $sm-margin;
+  // mobile은 margin이 고정이지만 tablet이나 desktop일때 container size가 고정이고 양 옆으로 빈 공간(margin)이 저절로 배치되게해서 grid를 정 중앙에 배치시키기 위해서 margin을 auto로 설정
   margin: 0 auto;
 
   .row {
     display: flex;
+    // 주르륵 흘러 내리게 하기 위해서(기본값 no-wrap)
     flex-wrap: wrap;
   }
 
+  // 속성 선택자(css)-col: unit + gutter
   [class^="col-"] {
+    // 양쪽에 gutter 있어서 항상 padding필요 - contents가 들어가는 부분은 unit이기때문
     padding: 0 $gutter / 2;
   }
 
+  // 반복문 사용으로 col 개수 늘어날때 마다 width 계산 안해도됨
   @for $i from 1 through $sm-columns {
     .col-sm-#{$i} {
       width: percentage($i / $sm-columns);
     }
   }
 
+  // 760px 일때만 적용(MOBILE이랑 달라지는 것만 적음)
   @media screen and (min-width: $md-breakpoint) {
     max-width: $md-max-container;
     padding: 0 $md-margin;
@@ -73,10 +94,12 @@ $lg-max-container: ($lg-unit + $gutter) * $lg-columns;
 
   @media screen and (min-width: $lg-breakpoint) {
     max-width: $lg-max-container;
+    // figma-margin이 auto이기 때문에 padding 필요X
     padding: 0;
 
     @for $i from 1 through $lg-columns {
       .col-lg-#{$i} {
+        // unit값 고정이기 때문에 %사용X
         width: ($lg-unit + $gutter) * $i;
       }
     }
