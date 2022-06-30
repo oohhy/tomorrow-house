@@ -1,0 +1,34 @@
+// map; key: value형태 2.if문 반복, flexbox key값 길게 쓰기 싫어서 map생성
+$flex-map: (
+  start: flex-start,
+  end: flex-end,
+  between: space-between,
+  around: space-around,
+  stretch: stretch,
+  center: center,
+);
+// function은 @include 안해도 됨 함수- 값 반환, mixin- 코드 반환 3.flexbox 축약형으로 map생성한 값을 flexbox에 반환하는 함수 생성
+// map-get :sass내장함수 map에서 원하는 값 가지고 오기
+@function _get-flex-value($key) {
+  @return map-get($flex-map, $key);
+}
+
+//1.display, align, justify 너무 많이 쓰는거 줄이기. 기본값으로 가장 많이 쓰는 center,center
+@mixin flexbox($jc: center, $ai: center) {
+  display: flex;
+  align-items: _get-flex-value($ai);
+  justify-content: _get-flex-value($jc);
+}
+
+@mixin inline-flexbox($jc: center, $ai: center) {
+  display: inline-flex;
+  align-items: _get-flex-value($ai);
+  justify-content: _get-flex-value($jc);
+}
+
+@mixin column-flexbox($jc: center, $ai: center) {
+  display: flex;
+  flex-direction: column;
+  align-items: _get-flex-value($ai);
+  justify-content: _get-flex-value($jc);
+}
