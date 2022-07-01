@@ -29,6 +29,7 @@
   letter-spacing: $letter-spacing-24;
 }
 
+// 크기, color를 변수로 받음 단, color기본값은 false
 @mixin text-style($size, $color: false) {
   @if ($size == 12) {
     @include text-style-12;
@@ -54,11 +55,8 @@
     @include text-style-24;
   }
 
+  // color type이 color이면 입력받은 색으로 지정
   @if (type-of($color) == color) {
     color: $color;
   }
-}
-
-p {
-  @include text-style(14, $secondary);
 }

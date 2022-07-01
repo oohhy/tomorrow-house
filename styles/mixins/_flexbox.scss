@@ -20,6 +20,7 @@ $flex-map: (
   justify-content: _get-flex-value($jc);
 }
 
+//자기가 가지고있는 contents에 맞게 알아서 사이즈 조절
 @mixin inline-flexbox($jc: center, $ai: center) {
   display: inline-flex;
   align-items: _get-flex-value($ai);
