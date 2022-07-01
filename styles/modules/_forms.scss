@@ -1,0 +1,80 @@
+//공통 요소 선언
+%form-base {
+  @include text-style(16, $primary);
+  display: block;
+  height: 40px;
+  width: 100%;
+  padding: 0 16px;
+  background-color: $white;
+  border: 1px solid $border;
+  border-radius: 4px;
+  appearance: none;
+  transition: background-color 200ms ease-in-out;
+
+  &::placeholder {
+    color: $tertiary;
+  }
+
+  &:not(:disabled):hover {
+    background-color: $background;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.form-select,
+.form-input {
+  @extend %form-base;
+}
+
+//select
+.select-group {
+  //완전 똑 떼서 다른데 갖다 붙이기
+  position: relative;
+
+  &.is-active {
+    .form-select {
+      border-color: $blue;
+    }
+
+    .ic-caret {
+      color: $blue;
+    }
+  }
+
+  .form-select {
+    //text 길어질때 최악의 상황 모면
+    padding-right: 40px;
+    text-overflow: ellipsis;
+  }
+
+  .ic-caret {
+    // 정렬, 위치 지정
+    //position absolute라서 select보다 위에 떠있기 때문에 덮고 있어서 클릭이 안됨
+    @include pos-center-y;
+    right: 8px;
+    font-size: 24px;
+    color: $tertiary;
+    // pointer랑 상관 없는 애니까 클릭 가능하게 봐줌
+    pointer-events: none;
+  }
+}
+
+//input
+.input-group {
+  position: relative;
+
+  .form-input {
+    padding-left: 40px;
+  }
+
+  .ic-search {
+    @include pos-center-y;
+    left: 10px;
+    font-size: 20px;
+    color: $secondary;
+  }
+}
