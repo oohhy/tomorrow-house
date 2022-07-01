@@ -1,0 +1,29 @@
+// 공통 스타일 선언 - placeholder 사용: %이름 {공통 스타일} but, ()로 변수 사용 불가
+%tag-base {
+  //글자 크기에 따라 box사이즈 바뀜 inline-flexbox
+  @include inline-flexbox;
+  @include text-style(12);
+  height: 20px;
+  padding: 0 6px;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.tag-red {
+  //place holder사용 @extend 쓰기
+  @extend %tag-base;
+  color: $white;
+  background-color: $red;
+}
+
+.tag-green {
+  @extend %tag-base;
+  color: $white;
+  background-color: $green;
+}
+
+.tag-gray {
+  @extend %tag-base;
+  color: $secondary;
+  background-color: $border;
+}
