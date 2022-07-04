@@ -11,25 +11,16 @@
     .button-group {
       @include flexbox(end);
     }
-    .gnb-search-button {
+
+    // .gnb-icon-button이지만 다른 요소와의 간격을 주기 위한 내용이기 때문에 따로 빼지 X(레이아웃의 일부로 봄)
+    .gnb-icon-button.is-search {
       margin-right: 4px;
     }
   }
 
-  &-icon-button {
-    @include flexbox;
-    width: 32px;
-    height: 32px;
-    font-size: 24px;
-    color: $secondary;
-  }
-
-  &-menu-button {
-    color: $blue;
-  }
-
   .logo {
     @include pos-center;
+
     a {
       display: block;
     }
