@@ -17,6 +17,14 @@
     }
   }
 
+  &.is-cart {
+    i {
+      position: relative;
+      top: 1px;
+      right: 1px;
+    }
+  }
+
   &:active {
     color: $primary;
   }
