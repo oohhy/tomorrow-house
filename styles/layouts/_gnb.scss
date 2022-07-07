@@ -90,10 +90,37 @@
   }
 
   @include responsive(D) {
-    &-right {
+    &-search {
+      position: relative;
+      width: 264px;
+      margin-right: 24px;
+
       .input-group {
-        width: 264px;
-        margin-right: 24px;
+        width: 100%;
+      }
+
+      .search-history {
+        position: absolute;
+        // %로 위치 제어할때 부모 기준으로 top-height, left-width 끼리 맞춰서 이동
+        // calc사용시 연산자랑 숫자 띄워서 쓰기!!
+        top: calc(100% + 8px);
+        left: 0;
+        // 에니메이션 없이 그냥 나타남- display: none;
+        display: none;
+        width: 100%;
+        padding: 16px 8px 8px;
+        background-color: $white;
+        border: 1px solid $border;
+        border-radius: 4px;
+        box-shadow: $dropdown-shadow;
+
+        &.is-active {
+          display: block;
+        }
+
+        &-header {
+          padding: 0 8px;
+        }
       }
     }
   }
