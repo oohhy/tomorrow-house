@@ -1,0 +1,42 @@
+// 시작점 다름 15px X 7px O
+// 보더 포함 list height 40px
+// 스크롤 영역: 전체 320px(조건1.overflow-x 기준점 = .lnb, 조건2.lnb-list가 자식 요소를 다 감쌀만큼 넓게 width를 가지게 하기-list에 inline-flexbox )
+// active일때 파란색 보더가 그냥 보더 덮음
+// 스크롤바 없음
+.lnb {
+  //3. 스크롤 영역 주의!!over-flow-x를 &-list에 주면 영역 290px
+  overflow-x: auto;
+
+  //스크롤바 없애기
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &-list {
+    // width를 자식들을 다 감쌀 수 있게 하기 위해서 inline으로 변경
+    @include inline-flexbox(start);
+    position: relative;
+    left: -8px;
+    white-space: nowrap;
+  }
+
+  &.is-active {
+    a {
+      color: $blue;
+      border-bottom: 2px solid $blue;
+    }
+  }
+
+  a {
+    // inline-width를 지정해주지 않아서 자기 text만큼을 width로 잡음
+    @include inline-flexbox;
+    @include text-style(13, $dark);
+    height: 40px;
+    padding: 0 8px;
+    font-weight: 700;
+  }
+
+  .ic-new {
+    color: $red;
+  }
+}
