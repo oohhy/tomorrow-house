@@ -1,4 +1,6 @@
 .lnb {
+  $lnb-height-sm: 40px;
+  $lnb-height-md: 50px;
   $lnb-link-padding: 8px;
   // 그리드 시작점에서 뷰포트 시작점 까지 거리
   $grid-margin: $sm-margin + $gutter / 2;
@@ -7,12 +9,13 @@
   overflow-x: auto;
 
   &-list {
+    // 모바일에서는 그리드 시스템 적용X
     @include inline-flexbox(start);
     // border색 보더를 그리드 시작점에서 왼쪽으로 붙이기
     margin-left: -#{$grid-margin};
     // 글자랑 파란 보더는 시작점 7px
     padding: 0 #{$grid-margin - $lnb-link-padding};
-    height: 40px;
+    height: $lnb-height-sm;
     border-bottom: 1px solid $border;
     // list-content(=a)가 안찌그러지게
     white-space: nowrap;
@@ -30,10 +33,36 @@
       //item안에서 가운데 정렬, width지정 안하면 가지고있는 content의 폭 만큼으로 자동 지정
       @include inline-flexbox;
       @include text-style(13, $dark);
-      height: 40px;
+      height: $lnb-height-sm;
       padding: 0 $lnb-link-padding;
       font-weight: 700;
       border-bottom: 2px solid transparent;
+
+      &:hover {
+        color: $blue;
+      }
+    }
+  }
+
+  @include responsive(T) {
+    height: $lnb-height-md;
+    // 더이상 overflow-x 쓰지 않기 때문에 border를 lnb에 주면 됨
+    border-bottom: 1px solid $border;
+    overflow-x: visible;
+
+    &-list {
+      // 테블릿 부터는 그리드 시스템 적용
+      height: auto;
+      margin: 0;
+      padding: 0;
+      border-bottom: none;
+    }
+
+    &-item {
+      a {
+        @include text-style(14);
+        height: $lnb-height-md;
+      }
     }
   }
 }
