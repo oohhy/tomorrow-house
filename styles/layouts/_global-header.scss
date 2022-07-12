@@ -11,10 +11,14 @@
 
   .gnb {
     top: 0;
+    // position:fixed때문에 search-modal, my-menu가 lnb보다 밑에 있는것 보완
+    z-index: $gnb-level;
   }
 
   .lnb {
     top: $gnb-height-sm;
+    //gnb보다 낮게
+    z-index: $lnb-level;
   }
 
   @include responsive(T) {
