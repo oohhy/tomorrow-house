@@ -23,11 +23,26 @@
     height: 20px;
     font-size: 20px;
     color: $secondary;
+
+    &:hover,
+    &:active {
+      opacity: 0.4;
+    }
   }
 
   .checkout-select {
     position: relative;
     display: inline-block;
+
+    &:hover {
+      select {
+        border-color: $tertiary;
+      }
+
+      i {
+        color: $secondary;
+      }
+    }
 
     select {
       @include text-style(14, $primary);
@@ -39,6 +54,7 @@
       border: 1px solid $border;
       border-radius: 3px;
       //   브라우저가 주는 select 펼치는 이모티콘의 기본 디자인 없애기
+      transition: border-color 100ms ease-in-out;
       appearance: none;
     }
 
@@ -48,6 +64,7 @@
       font-size: 20px;
       color: $tertiary;
       //   아이콘이  포인터 가리는 효과 없애기
+      transition: color 100ms ease-in-out;
       pointer-events: none;
     }
   }
