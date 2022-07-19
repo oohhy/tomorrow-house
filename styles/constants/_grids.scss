@@ -1,0 +1,17 @@
+// 모두 동일해서 별명 붙일 필요 X
+$gutter: 20px;
+
+// mobile
+$sm-columns: 4;
+$sm-margin: 5px;
+
+$md-columns: 12;
+$md-margin: 30px;
+$md-max-container: 960px + $md-margin * 2;
+
+$lg-columns: 12;
+$lg-unit: 75px;
+// 1140px를 식으로 표현(unit이나 gutter 값에 변동 있을때 수정 유용)
+$lg-max-container: ($lg-unit + $gutter) * $lg-columns;
+
+$grid-margin: 15px;
